@@ -44,6 +44,23 @@ export interface ICoreHelpers {
    * characters. An ellipsis is appended to the string if it exceeds the
    * maximum length.
    *
+   * **Example**
+   * >`shorten("This is a test", 10)` => `"This is..."`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@excerpt" data-helper="shorten" data-helper-options-length="50"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= shorten(excerpt, 50) %>
+   * >```
+   *
    * - `content`: The string to shorten.
    * - `length`: The maximum length of the resulting string.
    * - `highlights`: Optional. If provided, the string will be highlighted
@@ -55,6 +72,23 @@ export interface ICoreHelpers {
    * Shortens a string using an algorithm suitable for file paths. The helper
    * will insert an ellipsis in the string where text has been removed when
    * the path exceeds the maximum length.
+   *
+   * **Example**
+   * >`shortenPath("/file/path/test/example", 10)` => `"/file/p..."`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@filepath" data-helper="shortenPath" data-helper-options-length="50"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= shortenPath(filepath, 50) %>
+   * >```
    *
    * - `content`: The path to shorten.
    * - `length`: The maximum length of the resulting string.
@@ -68,6 +102,24 @@ export interface ICoreHelpers {
    * insert an ellipsis in the string where text has been removed when the URI
    * exceeds the maximum length.
    *
+   * **Example**
+   * >`shortenUri("https://docs.coveo.com/en/0/coveo-documentation-for-developers", 30)` => `"https://docs.coveo.com/.../..."`
+   *
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@clickUri" data-helper="shortenUri" data-helper-options-length="50"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= shortenUri(clickUri, 50) %>
+   * >```
+   *
    * - `content`: The URI to shorten.
    * - `length`: The maximum length of the resulting string.
    * - `highlights`: Optional. If provided, the string will be highlighted
@@ -77,6 +129,24 @@ export interface ICoreHelpers {
   shortenUri: (content: string, length: number, highlights?: IHighlight[], cssClass?: string) => string;
   /**
    * Highlights a string using the provided highlight information.
+   *
+   * **Examples**
+   * >
+   * >
+   * >
+   *
+   * **Usage Examples**
+   * >**HTML**
+   * >
+   * >```html
+   * >
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * >
+   * >```
    *
    * - `content`: The URI to shorten.
    * - `highlights`: Optional. The highlight information to use.
@@ -89,6 +159,24 @@ export interface ICoreHelpers {
    * associated stemming words from the index.
    * The only required parameter is the content, which specify the string that needs to be highlighted.
    * The other parameters will normally be automatically resolved for you from the current result object.
+   *
+   * **Examples**
+   * >
+   * >
+   * >
+   *
+   * **Usage Examples**
+   * >**HTML**
+   * >
+   * >```html
+   * >
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * >
+   * >```
    *
    * - `content`: The string content to highlight
    * - `termsToHighlight`: The terms to highlight (see {@link IHighlightTerm})
@@ -106,6 +194,24 @@ export interface ICoreHelpers {
    * that it should be used to highlight HTML content. The helper takes care
    * of not highlighting the HTML markup.
    *
+   * **Examples**
+   * >
+   * >
+   * >
+   *
+   * **Usage Examples**
+   * >**HTML**
+   * >
+   * >```html
+   * >
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * >
+   * >```
+   *
    * - `content`: The string content to highlight
    * - `termsToHighlight`: The terms to highlight (see {@link IHighlightTerm})
    * - `phraseToHighlight`: The phrases to highlight (see {@link IHighlightPhrase})
@@ -120,6 +226,29 @@ export interface ICoreHelpers {
   /**
    * Formats a numeric value using the format string.
    *
+   * **Examples**
+   * >`number(123.45, "n")` => `$123.45`
+   * >
+   * >`number(123.45, "n0")` => `123`
+   * >
+   * >`number(123.45, "c1")` => `$123.5`
+   * >
+   * >`number(123.45, "p2")` => `123.45 %`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@percentScore" data-helper="number" data-helper-options-format="c1"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= number(percentScore, "c1") %>
+   * >```
+   *
    * - `content`: The numeric value to format.
    * - `format`: The format string to use. The options available are defined by
    *   the [Globalize](https://github.com/klaaspieter/jquery-global#numbers) library.
@@ -128,27 +257,111 @@ export interface ICoreHelpers {
   /**
    * Formats a date value to a date-only string using the specified options.
    *
+   * **Examples**
+   * >`date(1430845255000)` => `"5/5/2015"`
+   * >
+   * >`date(1525775284000)` => `"May 08"`
+   * >
+   * >`date(1526820214000)` => `"Last Sunday"`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@date" data-helper="date" data-helper-options-useLongDateFormat="true"></div>
+   * >```
+   *
+   * >**Underscore
+   * >
+   * >```erb
+   * ><%= date(raw.date, {useLongDateFormat: true}) %>
+   * >```
+   *
    * - `content`: The Date value to format.
-   * - `options`: Optional. The options to use (see IDateToStringOptions).
+   * - `options`: Optional. The options to use (see {@link IDateToStringOptions}).
    */
   date: (content: any, options?: IDateToStringOptions) => string;
   /**
    * Formats a date value to a time-only string using the specified options.
    *
+   * **Examples**
+   * >`time(1430845255000)` => `"5/5/2015"`
+   * >
+   * >`time(1525775284000)` => `"May 08"`
+   * >
+   * >`time(1526820214000)` => `"Last Sunday"`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@time" data-helper="date" data-helper-options-useLongDateFormat="true"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= time(raw.date, {useLongDateFormat: true}) %>
+   * >```
+   *
    * - `content`: The Date value to format.
-   * - `options`: Optional. The options to use (see IDateToStringOptions).
+   * - `options`: Optional. The options to use (see {@link IDateToStringOptions}).
+   *
+   * - `content`: The Date value to format.
+   * - `options`: Optional. The options to use (see {@link IDateToStringOptions}).
    */
   time: (content: any, options?: IDateToStringOptions) => string;
   /**
    * Formats a date value to a date and time string using the specified
    * options.
    *
+   * **Examples**
+   *
+   * >`dateTime(1527175925000)` => `"Today, 11:32 AM"`
+   * >
+   * >`dateTime(1526558826000)` => `"May 17, 8:07 AM"`
+   * >
+   * >`dateTime(1162784710000)` => `"11/5/2006"`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@date" data-helper="dateTime" data-helper-options-alwaysIncludeTime="true"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= dateTime(raw.date, {alwaysIncludeTime: true}) %>
+   * >```
+   *
    * - `content`: The Date value to format.
-   * - `options`: Optional. The options to use (see IDateToStringOptions).
+   * - `options`: Optional. The options to use (see {@link IDateToStringOptions}).
    */
   dateTime: (content: any, options?: IDateToStringOptions) => string;
   /**
    * Formats a currency value to a string using the specified options.
+   *
+   * **Example**
+   *
+   * >`currency(1000)` => `$1,000`
+   *
+   * **Usage Examples**
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@size" data-helper="currency"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= currency(raw.size) %>
+   * >```
    *
    * - `content`: The number value to format.
    * - `options`: Optional. The options to use (see ICurrencyToStringOptions).
@@ -158,12 +371,54 @@ export interface ICoreHelpers {
    * Formats a date value to a date and time string using options suitable for
    * email dates
    *
+   * **Examples**
+   *
+   * >`dateTime(1526736736000)` => `"Last Saturday, 9:32 AM"`
+   * >
+   * >`dateTime(1524218117000)` => `"April 20"`
+   * >
+   * >`dateTime(1162784710000)` => `"11/5/2006"`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@date" data-helper="emailDateTime" data-helper-options-useLongDateFormat="true"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= emailDateTime(raw.date, {useLongDateFormat: true}) %>
+   * >```
+   *
    * - `content`: The Date value to format.
-   * - `options`: Optional. The options to use (see IDateToStringOptions).
+   * - `options`: Optional. The options to use (see {@link IDateToStringOptions}).
    */
   emailDateTime: (content: any, options?: IDateToStringOptions) => string;
   /**
    * Renders one or several email values in `mailto:` hyperlinks.
+   *
+   * **Examples**
+   *
+   * >`email("test")` => `<a title="test" href="mailto:test">test</a>`
+   * >
+   * >`email("Test sentence")` => `<a title="Test sentence" href="mailto:Test%20sentence">Test sentence</a>`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@email" data-helper="email" data-helper-options-me="Billy Joe" data-helper-options-truncateName="true"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= email(raw.email, {me: "Billy Joe", truncateName: true}) %>
+   * >```
    *
    * - `value`: The string or array of strings that contains a list of semicolon-separated email
    *   values. When multiple values are passed, each value is displayed in a
@@ -190,12 +445,48 @@ export interface ICoreHelpers {
   /**
    * Formats a clickable HTML link (`<a>`).
    *
+   * **Example**
+   *
+   * >`anchor("test")` => `<a href="test">test</a>`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@clickUri" data-helper="anchor" data-html-value="true" data-helper-options-text="Click me!"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= anchor(clickUri, {text: "Click me!"}) %>
+   * >```
+   *
    * - `href`: The link URI
    * - `options`: Optional. The options to use (see {@link IAnchorUtilsOptions})
    */
   anchor: (href: string, options?: IAnchorUtilsOptions) => string;
   /**
    * Formats an HTML image tag (`<img>`).
+   *
+   * **Example**
+   *
+   * >`image("test")` => `<img src="test"/>`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-html-value="true" data-field="@ytthumbnailurl" data-helper-options-height="500" data-helper="image"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= image(raw.ytthumbnailurl, {height: 500}) %>
+   * >```
    *
    * - `src`: The image source URI
    * - `options`: Optional. The options to use (see {@link IImageUtilsOptions})
@@ -206,6 +497,23 @@ export interface ICoreHelpers {
    * object to query the REST API to get the thumbnail for this result. For
    * example, this can be used to great effect when designing a template
    * showing users or previews of files.
+   *
+   * **Examples**
+   * >`thumbnail()` => `<img data-coveo-uri-hash="ABC123DEF456" src="image/path"/>`
+   *
+   * **Usage Examples**
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-helper="thumbnail" data-field="@ytthumbnailurl"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= thumbnail() %>
+   * >```
+   *
    * - `result`: Optional. The current result object inside your template. In
    *   underscore, it is referenced as `obj`. By default, the result
    *   will be resolved automatically from your current template function (
@@ -220,6 +528,20 @@ export interface ICoreHelpers {
    * Generates an icon based on the file type of the current result. The icon
    * will be contained inside a `<span>` element with the appropriate CSS
    * class.
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class='CoveoFieldValue' data-field='@filetype' data-helper="fromFileTypeToIcon"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= fromFileTypeToIcon(raw.filetype) %>
+   * >```
    *
    * - `result`: Optional. The current result object inside your template. In
    *   underscore, it is referenced as `obj`. By default, the result
@@ -238,6 +560,25 @@ export interface ICoreHelpers {
    * ResultList Component, the contextObject would, by default, be the Query
    * Results.
    *
+   * **Examples**
+   * >
+   * >
+   * >
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * >
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= loadTemplate("ReusableTemplate", {condition: 'raw.filetype == "YouTubeVideo"'}) %>
+   * >```
+   *
    * - `templateId`: The ID of the template to load.
    * - `condition`: Optional. The boolean condition to determine if this template should
    *   load for this result set. Most of the time this would be a condition of
@@ -251,9 +592,23 @@ export interface ICoreHelpers {
    *
    * **Examples**
    *
-   * >`timeSpan(1, {isMilliseconds: false}) => '00:01'`
+   * >`timeSpan(1, {isMilliseconds: false})` => `'00:01'`
    * >
-   * >`timeSpan(1000, {isMilliseconds: true}) => '00:01'`
+   * >`timeSpan(1000, {isMilliseconds: true})` => `'00:01'`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-helper="timeSpan" data-field="@date" data-helper-options-isMilliseconds="false"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= timeSpan(raw.date, {isMilliseconds: false}) %>
+   * >```
    *
    * - `value`: The number to convert to a timespan
    * - `options` : The options to use (see {@link ITimeSpanUtilsOptions})
@@ -264,18 +619,18 @@ export interface ICoreHelpers {
    *
    * **Examples:**
    *
-   * >`size(1024) => 1024 B`
+   * >`size(1024)` => `1024 B`
    * >
-   * >`size(1025) => 1 KB`
+   * >`size(1025)` => `1 KB`
    * >
-   * >`size(10240) => 10 KB`
+   * >`size(10240)` => `10 KB`
    *
    * **Usage Examples:**
    *
    * >**HTML**
    * >
    * > ```html
-   * > <div class="CoveoFieldValue" data-field='@size' data-helper="size" data-helper-options-base="1"></div>
+   * > <div class="CoveoFieldValue" data-field="@size" data-helper="size" data-helper-options-base="1"></div>
    * > ```
    *
    * >**Underscore**
@@ -295,15 +650,46 @@ export interface ICoreHelpers {
    *
    * **Examples**
    *
-   * >`translatedCaption('doc') => Document`
+   * >`translatedCaption('doc')` => `Document`
    * >
-   * >`translatedCaption('xls') => Spreadsheet Document`
+   * >`translatedCaption('xls')` => `Spreadsheet Document`
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-helper="translatedCaption" data-field="@fileExtension"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= translatedCaption(raw.fileExtension) %>
+   * >```
    *
    * - `value`: The string value to translate
    */
   translatedCaption: (value: string) => string;
   /**
    * Replace all carriage return in a string by a &lt;br /&gt; tag
+   *
+   * **Example**
+   * >
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * ><div class="CoveoFieldValue" data-field="@title" data-helper="encodeCarriageReturn"></div>
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><%= encodeCarriageReturn(raw.title) %>
+   * >```
    *
    * - `value`: The string value to replace the carriage returns in.
    */
@@ -314,6 +700,28 @@ export interface ICoreHelpers {
    * If it's not a mobile device, the helper return null ;
    *
    * If it's a mobile device, return the type of device (Android, iPhone, iPad) etc.
+   *
+   * **Examples**
+   * >
+   *
+   * **Usage Examples**
+   *
+   * >**HTML**
+   * >
+   * >```html
+   * >
+   * >```
+   *
+   * >**Underscore**
+   * >
+   * >```erb
+   * ><% if(isMobileDevice() != null) { %>
+   * >  <div class="CoveoExcerpt"></div>
+   * ><% } else { %>
+   * >  <div class='CoveoFieldValue' data-field="@title"></div>
+   * ><% } %>
+   * >```
+   *
    */
   isMobileDevice: () => string;
 }
