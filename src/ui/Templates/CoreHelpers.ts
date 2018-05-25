@@ -145,7 +145,7 @@ export interface ICoreHelpers {
    * >**Underscore**
    * >
    * >```erb
-   * >
+   * ><%= highlight(clickUri, printableUriHighlights) %>
    * >```
    *
    * - `content`: The URI to shorten.
@@ -169,13 +169,13 @@ export interface ICoreHelpers {
    * >**HTML**
    * >
    * >```html
-   * >
+   * ><a class="CoveoResultLink" data-field-value="@clickUri" data-helper="highlight"></a>
    * >```
    *
    * >**Underscore**
    * >
    * >```erb
-   * >
+   * ><a class="CoveoResultLink" data-field-value="@clickUri"><%= highlight( printableUri, printableUriHighlights ) %></a>
    * >```
    *
    * - `content`: The string content to highlight
@@ -235,13 +235,7 @@ export interface ICoreHelpers {
    * >
    * >`number(123.45, "p2")` => `123.45 %`
    *
-   * **Usage Examples**
-   *
-   * >**HTML**
-   * >
-   * >```html
-   * ><div class="CoveoFieldValue" data-field="@percentScore" data-helper="number" data-helper-options-format="c1"></div>
-   * >```
+   * **Usage Example**
    *
    * >**Underscore**
    * >
@@ -364,7 +358,7 @@ export interface ICoreHelpers {
    * >```
    *
    * - `content`: The number value to format.
-   * - `options`: Optional. The options to use (see ICurrencyToStringOptions).
+   * - `options`: Optional. The options to use (see {@link ICurrencyToStringOptions}).
    */
   currency: (content: any, options?: ICurrencyToStringOptions) => string;
   /**
@@ -411,7 +405,7 @@ export interface ICoreHelpers {
    * >**HTML**
    * >
    * >```html
-   * ><div class="CoveoFieldValue" data-field="@email" data-helper="email" data-helper-options-me="Billy Joe" data-helper-options-truncateName="true"></div>
+   * ><div class="CoveoFieldValue" data-field="@title" data-html-value="true" data-helper="email" data-helper-options-me="Billy Joe" data-helper-options-truncate-name="true"></div>
    * >```
    *
    * >**Underscore**
@@ -534,13 +528,13 @@ export interface ICoreHelpers {
    * >**HTML**
    * >
    * >```html
-   * ><div class='CoveoFieldValue' data-field='@filetype' data-helper="fromFileTypeToIcon"></div>
+   * ><div class='CoveoIcon' data-field='@filetype' data-helper="fromFileTypeToIcon"></div>
    * >```
    *
    * >**Underscore**
    * >
    * >```erb
-   * ><%= fromFileTypeToIcon(raw.filetype) %>
+   * ><div class='CoveoIcon'><%= fromFileTypeToIcon() %></div>
    * >```
    *
    * - `result`: Optional. The current result object inside your template. In
@@ -548,7 +542,7 @@ export interface ICoreHelpers {
    *   will be resolved automatically from your current template function (
    *   Meaning the nearest result in the current call stack execution inside
    *   your template)
-   * - `options`: Optional. The options to use (see {@link IIconOptions}).
+   * - `options`: Optional. The options to use.
    */
   fromFileTypeToIcon: (result?: IQueryResult, options?: any) => string;
   /**
@@ -560,23 +554,12 @@ export interface ICoreHelpers {
    * ResultList Component, the contextObject would, by default, be the Query
    * Results.
    *
-   * **Examples**
-   * >
-   * >
-   * >
-   *
    * **Usage Examples**
-   *
-   * >**HTML**
-   * >
-   * >```html
-   * >
-   * >```
    *
    * >**Underscore**
    * >
    * >```erb
-   * ><%= loadTemplate("ReusableTemplate", {condition: 'raw.filetype == "YouTubeVideo"'}) %>
+   * ><%= loadTemplate("ReusableTemplate", raw.filetype == "YouTubeVideo") %>
    * >```
    *
    * - `templateId`: The ID of the template to load.
@@ -675,20 +658,14 @@ export interface ICoreHelpers {
    * Replace all carriage return in a string by a &lt;br /&gt; tag
    *
    * **Example**
-   * >
+   * >`Hello\nWorld` => `Hello<br />World`
    *
-   * **Usage Examples**
-   *
-   * >**HTML**
-   * >
-   * >```html
-   * ><div class="CoveoFieldValue" data-field="@title" data-helper="encodeCarriageReturn"></div>
-   * >```
+   * **Usage Example**
    *
    * >**Underscore**
    * >
    * >```erb
-   * ><%= encodeCarriageReturn(raw.title) %>
+   * ><%= encodeCarriageReturn(raw.excerpt) %>
    * >```
    *
    * - `value`: The string value to replace the carriage returns in.
@@ -702,23 +679,17 @@ export interface ICoreHelpers {
    * If it's a mobile device, return the type of device (Android, iPhone, iPad) etc.
    *
    * **Examples**
-   * >
+   * >On an Android device => `isMobileDevice()` => `Android`
    *
-   * **Usage Examples**
-   *
-   * >**HTML**
-   * >
-   * >```html
-   * >
-   * >```
+   * **Usage Example**
    *
    * >**Underscore**
    * >
    * >```erb
    * ><% if(isMobileDevice() != null) { %>
-   * >  <div class="CoveoExcerpt"></div>
+   * >    <!--...-->
    * ><% } else { %>
-   * >  <div class='CoveoFieldValue' data-field="@title"></div>
+   * >    <!--...-->
    * ><% } %>
    * >```
    *

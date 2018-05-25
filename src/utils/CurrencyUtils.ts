@@ -3,8 +3,18 @@ import { Options } from '../misc/Options';
 import { Utils } from '../utils/Utils';
 import * as Globalize from 'globalize';
 
+/**
+ *
+ *
+ */
 export interface ICurrencyToStringOptions {
+  /**
+   *
+   */
   decimals?: number;
+  /**
+   *
+   */
   symbol?: string;
 }
 
