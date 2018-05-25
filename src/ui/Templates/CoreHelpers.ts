@@ -139,7 +139,7 @@ export interface ICoreHelpers {
    * >**HTML**
    * >
    * >```html
-   * >
+   * ><a class="CoveoResultLink" data-field-value="@clickUri" data-helper="highlight"></a>
    * >```
    *
    * >**Underscore**
@@ -266,7 +266,7 @@ export interface ICoreHelpers {
    * ><div class="CoveoFieldValue" data-field="@date" data-helper="date" data-helper-options-useLongDateFormat="true"></div>
    * >```
    *
-   * >**Underscore
+   * >**Underscore**
    * >
    * >```erb
    * ><%= date(raw.date, {useLongDateFormat: true}) %>
